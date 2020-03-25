@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <title>VueJs</title>    
+</head>
+<body>
+    <div id="app">
+        {{nome}}  {{idade}} {{faculdade.possui}} {{faculdade.curso}}
+        <h1 v-if="faculdade.possui"> tem facul</h1>    
+        <h1 v-else>nao tem</h1>    
+        
+        
+    </div>    
+
+
+    <script>      
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                nome: 'EduardoVf',
+                idade: 20,
+                faculdade: {
+                    possui: true,
+                    curso: 'ads'
+                }
+            }
+        })
+
+    </script>
+    
+</body>
+</html>

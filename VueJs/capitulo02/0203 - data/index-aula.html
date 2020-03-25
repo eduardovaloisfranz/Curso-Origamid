@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">        
+       {{empresa}}
+       {{produto}}
+       <br>       
+       <h1>Lado: {{lado}} </h1>
+       <p>Área: {{calcAreaQuadrado(lado)}}</p>
+       <p>Perimetro Quadrado: {{calcPerimetroQuadrado(lado)}}</p>
+    </div>
+
+    <script>
+       const app = new Vue({
+        el: '#app',
+        data: {            
+            empresa: "Apple",
+            produto: "iPhone",
+            lado: 4
+            //areaQuadrado: this.calcAreaQuadrado(this.lado)
+            //perimetroQuadrado: this.calcPerimetroQuadrado(this.lado)
+        },
+        methods: {
+            calcAreaQuadrado(lado){
+                return lado * lado;
+            },
+            calcPerimetroQuadrado(lado){
+                return lado * 4
+            }
+        }   
+       })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">        
+        <p>{{interface.latestPrice}}</p>
+        <p>{{interface.latestTime}}</p>
+        <p>{{interface.companyName}}</p>
+        <button @click="updateInterface">Atualizar info</button>
+    </div>
+
+    <script>
+        const URL_TO_FETCH = 'https://cloud.iexapis.com/stable/stock/aapl/quote?token=sk_4130f0a706a240139c2b6092d28cfad6'
+        
+        const app = new Vue({
+            
+            el: '#app',
+            data: {
+                interface: {
+                    latestPrice: 0,
+                    latestTime: 0,
+                    companyName: ''
+                }
+            },
+            methods: {
+                updateInterface(){
+                    //let self = this;
+                    fetch(URL_TO_FETCH,{                            
+                    }).then(response => {                        
+                        response.json().then((data) =>{
+                        console.log(`latestPrice ${data.latestPrice} latestTime ${data.latestTime} companyName ${data.companyName}`)                       
+                          this.interface.latestPrice = data.latestPrice; 
+                          //console.log(interface.latestPrice)                         
+                          this.interface.latestTime = data.latestTime;
+                          this.interface.companyName = data.companyName;
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                    })
+                    
+                    
+                    .catch(err => {                        
+                        console.log(err)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
