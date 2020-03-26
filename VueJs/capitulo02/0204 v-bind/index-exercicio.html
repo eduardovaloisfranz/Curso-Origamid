@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">         
+        <h1 :class="acoes[0].marketCap > acoes[1].marketCap ? 'vermelho' : 'verde'">Empresa 01: {{acoes[0].companyName}}</h1>
+        <p>Valor de Mercado: {{acoes[0].marketCap}}</p>    
+    
+    
+        <h1 :class="acoes[1].marketCap > acoes[0].marketCap ? 'vermelho' : 'verde'">Empresa 02: {{acoes[1].companyName}}</h1>
+        <p>Valor de Mercado: {{acoes[1].marketCap}}</p>  
+    
+
+      
+
+        
+    <button @click="atualizaAcoes()">Atualizar Info</button>
+    </div>
+
+    <script>
+        const URL_TO_FETCH1 = "https://cloud.iexapis.com/stable/stock/aapl/quote?token=sk_4130f0a706a240139c2b6092d28cfad6";
+        const URL_TO_FETCH2 = "https://cloud.iexapis.com/stable/stock/googl/quote?token=sk_4130f0a706a240139c2b6092d28cfad6";
+        const vm = new Vue({
+            el:"#app",
+            data: {
+                acoes: [{
+                    companyName: '',
+                    marketCap: 0
+                },
+                {
+                    companyName: '',
+                    marketCap: 0
+                }
+            ]
+            
+            },
+            methods: {
+                atualizaAcoes: function(){
+                    fetch(URL_TO_FETCH1).then(response => {
+                        response.json().then(result => {                                                       
+                            //this.acoes.push(result)
+                            //this.acoes[0] = result;
+                            Vue.set(this.acoes, 0, result);
+                        })}).catch(res => console.log(res))                        
+                        fetch(URL_TO_FETCH2).then(response => {
+                        response.json().then(result => {
+                            //this.acoes.push(result)
+                            //this.acoes[1] = result;
+                            Vue.set(this.acoes, 1, result)
+                        })}).catch(res => console.log(res)) 
+                    console.log(this.acoes)
+                }
+            }
+        })
+    </script>
+    <style>
+        /* body{ 
+             background-color: grey; 
+        }
+        */
+        .verde {
+            background-color: green;                        
+        }
+        .vermelho {
+            background-color: red;
+        }
+       
+    </style>
+  
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">        
+        <li><a @click.prevent="atualizaInfo" href="https://cloud.iexapis.com/stable/stock/aapl/quote?token=sk_4130f0a706a240139c2b6092d28cfad6">Apple</a></li>        
+        <li><a @click.prevent="atualizaInfo" href="https://cloud.iexapis.com/stable/stock/googl/quote?token=sk_4130f0a706a240139c2b6092d28cfad6">Google</a></li>
+        <li><a @click.prevent="atualizaInfo" href="https://cloud.iexapis.com/stable/stock/amzn/quote?token=sk_4130f0a706a240139c2b6092d28cfad6">Amazon</a></li>
+        <li><a @click.prevent="atualizaInfo" href="https://cloud.iexapis.com/stable/stock/ebay/quote?token=sk_4130f0a706a240139c2b6092d28cfad6">Ebay</a></li>
+        <li><a @click.prevent="atualizaInfo" href="https://cloud.iexapis.com/stable/stock/pypl/quote?token=sk_4130f0a706a240139c2b6092d28cfad6">Paypal</a></li>
+        <h1>{{company.companyName}}</h1>
+        <p>LastetPrice: {{company.latestPrice}}</p>
+        <p>MarketCap: {{company.marketCap}}</p>
+    </div>
+
+    <script>     
+        
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                company: {}
+
+             },
+            methods: {
+                atualizaInfo(event){
+                    const URL_TO_FETCH = event.target.href;                                        
+                    fetch(URL_TO_FETCH).then(res => {
+                        res.json().then(res => {
+                            this.company = res;
+                        })
+                    })
+               
+               
+                }
+                
+             }
+        })
+    </script>
+    <style>
+        /* body{ 
+             background-color: grey; 
+        }
+        */
+        .verde {
+            background-color: green;                        
+        }
+        .vermelho {
+            background-color: red;
+        }
+       
+    </style>
+  
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">        
+        <button @click="handleClick">Clique aqui</button>
+        <button @click="ativo = !ativo">Ativar</button>
+        {{ativo}}
+        <p v-if="ativo" :class="ativo ? 'verde' : 'vermelho'">Registro</p>
+
+        <a href="#interno" @click.prevent.once="handleClick">Link interno</a>
+        <input type="text" @keyup.tab="handleClick">
+        <p @mousemove="handleMove">esse é o mouse x: {{mouse.x}}</p>
+    </div> 
+
+    <script>
+       const app = new Vue({
+         el: '#app',
+         data: {
+            contador: 0,
+            ativo: true,
+            mouse: ""
+         },
+
+         methods: {
+             handleClick(event){
+                 console.log(event.key)
+             },
+             handleMove(event){
+                 this.mouse = event;
+             }
+         }
+       })
+    </script>
+    <style>
+        .verde{
+            background-color: green;
+        }
+        .vermelho {
+            background-color: red;
+        }
+    </style>
+    
+</body>
+</html>
