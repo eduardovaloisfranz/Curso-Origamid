@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">        
+        <input placeholder="Informe o nome" type="text" v-model.lazy="nome">
+        <br>
+        <textarea v-model="mensagem" placeholder="Informe a mensagem"></textarea>
+        <br>
+        
+        <input v-model.trim="email"/>
+        <!-- One Way dataBind -->
+        <p>nome: {{nome}}</p>
+        <p>Mensagem: {{mensagem}}</p>
+        <p>Email: {{email}}</p>
+        
+        <br>
+        <input type="text" v-model.number="ano">
+        {{ano}}
+        <br>
+
+
+        <input type="checkbox" id="receberEmail" v-model="receberEmail">
+        <br>
+        <label for="receberEmail">Receber Email</label>
+        <br>
+        {{receberEmail}}
+        <br>
+        
+        <br><br><br> 
+
+        <input type="radio" id="azul" value="azul" v-model="cor">
+        <label for="azul">Azul</label>
+        <input type="radio" id="vermelho" value="vermelho" v-model="cor">
+        <label for="vermelho">Vermelho</label>
+        <input type="radio" id="verde" value="verde" v-model="cor">
+        <label for="verde">Verde</label>
+        <p>Cor Selecionada: {{cor}}</p>
+
+        <select v-model="fruta">
+            <option value="" disabled>Selecione uma Fruta</option>
+            <option value="banana">Banana</option>
+            <option value="morango">Morango</option>
+            <option value="uva">Uva</option>
+        </select>
+        <p>
+            Fruta Selecionada: {{fruta}}
+        </p>
+        
+
+
+        </div>
+    
+    <script>     
+        
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                nome: 'Eduardo',
+                mensagem: '',
+                email: 'a@gmail.com',
+                receberEmail: false,
+                cor: '',
+                fruta: '',
+                ano: 0
+              
+             },
+            methods: {            
+               
+             
+             }
+        })
+    </script> 
+    <style>
+    
+    </style>
+</body>
+</html>

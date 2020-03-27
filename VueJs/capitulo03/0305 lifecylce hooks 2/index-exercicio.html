@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">                
+       <div>
+           <ul>
+               <li v-for="(valor, chave) in github">
+                   {{chave}} : {{valor}}
+               </li>
+           </ul>
+       </div>
+       {{contador}}
+       <button @click="contador++">Incrementar Botão</button>
+       
+    </div>    
+    <script>     
+        
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                github: {},
+                contador: 0                
+             },
+            methods: {            
+               puxaGithub(){
+                const URL_TO_FETCH = "https://api.github.com/users/eduardovaloisfranz"   
+                    fetch(URL_TO_FETCH)
+                        .then(res => res.json()
+                                .then(result => this.github = result))
+                                        .catch(res => console.log(res))
+               }
+             },
+             created(){
+                this.puxaGithub()
+             },
+             updated(){
+                 console.log(this.contador)
+                 document.title = this.contador;
+             }
+        })
+            
+    </script> 
+    <style>
+      
+    
+    </style>
+</body>
+</html>

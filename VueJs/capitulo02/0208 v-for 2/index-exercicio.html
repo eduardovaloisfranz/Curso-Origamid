@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">                
+        <ul>
+            <li v-for="(dado, key) in endereco">
+                {{key}} {{dado}}
+            </li>            
+        </ul>
+      <button @click="getInfo">Obter informações sobre endereco</button>
+      <div v-for="(curso, index) in cursos">
+          <h1>Nome do Curso: {{curso.curso}}</h1>
+          <a :href="curso.link">Link da Aula</a>
+          <div v-for="{nome, tempo} in curso.aulas">
+              <h2>Nome da Aula: {{nome}}</h2>
+              <p>Tempo da Aula: {{tempo}}</p>
+          </div>
+      </div>
+      <button @click="getAulas">Obter informacoes das aulas</button>
+    </div>        
+    <script>     
+        const URL_TO_FETCH = 'http://viacep.com.br/ws/89041460/json'
+        const AULAS_TO_FETCH = 'https://api.myjson.com/bins/rig5s'
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                endereco: {},
+                cursos: []
+                
+             },
+            methods: {
+               
+               getInfo() {                   
+                   fetch(URL_TO_FETCH).then(res => res.json().then(res => {
+                        this.endereco = res;
+                   })).catch(res => {
+                       console.log(res)
+                   })
+               },
+               getAulas(){
+                   fetch(AULAS_TO_FETCH).then(res => {
+                       res.json().then(result => {
+                           console.log(result)
+                           this.cursos = result;
+                       })
+                   })
+               }
+               
+             }
+        })
+    </script> 
+</body>
+</html>

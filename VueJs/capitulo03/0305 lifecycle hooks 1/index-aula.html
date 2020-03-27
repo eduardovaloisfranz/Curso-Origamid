@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">        
+       {{mensagem}}
+        <ul>
+            <li v-for="(dado, chave) in dados">
+                {{chave}} : {{dado}}
+            </li>
+        </ul>
+        {{contador}}
+        <button @click="contador++">Clica ae</button>
+        <button @click="destruir">Destruir</button>
+       
+    </div>    
+    <script>     
+        
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                mensagem: 'Essa é uma mensagem',
+                dados: {},
+                contador: 0
+             },
+            methods: {            
+                puxarGithub(){
+                    const URL_TO_FETCH = 'https://api.github.com/users/origamid'
+                    fetch(URL_TO_FETCH)
+                        .then(res=> res.json().then(result => {
+                            this.dados = result;
+                        }))
+                },
+                destruir(){
+                    this.$destroy();
+                }  
+             },
+             created(){
+                 console.log(this.mensagem)                                                     
+                 this.puxarGithub();
+                 console.log("Elemento: " + this.$el)
+             },
+             beforeCreate(){
+                 console.log(this.mensagem)
+             },
+             beforeMount(){
+                console.log('Before mount: ' + this.mensagem)
+                console.log("Elemento: " + this.$el)
+             },
+             mounted(){
+                console.log("Elemento: " + this.$el)
+             },
+             beforeUpdate(){
+                 console.log(this.contador)
+             },
+             updated(){
+                 console.log(this.contador)
+             },
+             beforeDestroy(){
+                 console.log("vai destruir")
+             },
+             destroyed(){
+                 console.log("destruiu!")
+             }
+        })
+            
+    </script> 
+    <style>
+      
+    
+    </style>
+</body>
+</html>

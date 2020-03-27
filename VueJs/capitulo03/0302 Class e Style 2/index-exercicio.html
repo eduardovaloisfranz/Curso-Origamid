@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">               
+        <ul :style="estiloUl">
+            <li :style="[estiloLI, estiloParagrafo]">Sobre</li>
+            <li :style="[estiloLI, estiloParagrafo]">Produtos</li>
+            <li :style="[estiloLI, estiloParagrafo]">Serviços</li>
+            <li :style="[estiloLI, estiloParagrafo]">Contato</li>
+        </ul>
+        <button @click="alterarEstilo">Mudar estilo</button>
+        <p :style="estiloParagrafo">Cor vai mudar</p>
+
+        <button @click="mudarCor">Gerar Cor Aleatoria para o Paragrafo</button>
+
+    </div>        
+    <script>         
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                column: false,
+                estiloUl: {
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    fontFamily: 'monospace',
+                    listStyle: 'none',
+                    padding: '0px',
+                    margin: '0px',
+                    flexDirection: 'column'                  
+                },
+                estiloParagrafo: {
+                    backgroundColor: '#084f'
+                }
+             },
+             computed: {      
+                estiloLI(){
+                    let estiloLI = {
+                        padding: '20px',
+                        background: '#84e',
+                        color: 'white',
+                        borderRadius: '4px',
+                        margin: '10px',
+                        flex: 1,
+                        textAlign: 'center'
+                    }
+                    return estiloLI;
+                },
+                          
+                
+             },
+             methods: {
+                alterarEstilo(){
+                    //console.log(this.estiloUl.flexDirection)                    
+                     if(this.estiloUl.flexDirection === 'column'){
+                         this.estiloUl.flexDirection = 'row'
+                     }else if(this.estiloUl.flexDirection === 'row'){
+                         this.estiloUl.flexDirection = 'column'
+                     }
+                    
+                    //vm.$Set(this.estiloUl, 6, obj)
+                },
+                mudarCor(){
+                        const randomCor = `hsl(${Math.random() * 360}, 100%, 50%`
+                        //console.log(randomCor)
+                        this.estiloParagrafo.backgroundColor = randomCor; 
+                    }
+             }  
+            
+        })
+    </script> 
+    <style>     
+       /* .column {
+           flex-direction: column;
+       } */
+
+       li{
+           padding: 20px;
+           background: #84e;
+           color: white;
+           border-radius: 4px;
+           margin: 10px;
+           flex: 1;
+           text-align: center;
+       }
+    </style>
+</body>
+</html>

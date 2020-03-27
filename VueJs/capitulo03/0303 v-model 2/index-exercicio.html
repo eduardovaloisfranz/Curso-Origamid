@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">                   
+        <button :style="estiloBotao">Estilizado Pelo Usuario!</button>        
+        <br>
+        <label for="width">Digite o tamanho do botão: </label>
+        <input type="text" placeholder="Digite o width: " id="width" v-model="estiloBotao.width">
+        <br>
+        <label for="height">Digite a altura do botão: </label>
+        <input type="text" placeholder="Digite o height: " id="height" v-model="estiloBotao.height">
+        <br>
+        <label for="fontSize">Digite o tamanho da letra no botão: </label>
+        <input type="text" placeholder="Digite o tamanho da letra: " id="fontSize" v-model="estiloBotao.fontSize">
+        <br>
+        <label for="fonte">Digite o nome da fonte no botão: </label>
+        <input type="text" placeholder="Digite o nome da fonte no botão: " id="fonte" v-model="estiloBotao.fontFamily">
+        <br>
+        <label for="textAlign">Digite o tipo de alinhamento no botão: </label>
+        <input type="text" placeholder="Digite o tipo de alinhamento no botão: " id="textAlign" v-model="estiloBotao.textAlign">
+        <br>
+        <label for="cor">Selecione a cor de fundo desejada para o botão</label>
+        <input type="color"id="cor" v-model="estiloBotao.background">
+        <br>
+        <label for="cor">Selecione a cor desejada paras letras do botão</label>
+        <input type="color"id="cor" v-model="estiloBotao.color">
+        <br>
+        <label for="borderRadius">Digite o porcentagem da borda do botão </label>
+        <input type="text" placeholder="Digite o porcentagem da borda do botão: " id="borderRadius" v-model="estiloBotao.borderRadius">
+        
+        <form action="" method="post">
+            <input type="text" placeholder="Informe nome" v-model.lazy="infoUser.nome">
+            <br>
+            <input type="text" placeholder="Informe o email" v-model.lazy="infoUser.email">
+            <br>
+            <input type="text" placeholder="Informe o telefone" v-model.lazy="infoUser.telefone">
+            <br>
+            <textarea type="text" placeholder="informe a mensagem" v-model.lazy="infoUser.mensagem"></textarea>
+            <button type="submit" @click.prevent="enviaFormulario">Enviar Informacoes</button>
+        </form>
+        <div v-for="(info, chave) in infoUser.resultado">
+            <p>
+                {{chave}} : {{info}}
+            </p>
+        </div>
+        
+
+        </div>
+    
+    <script>     
+        
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                estiloBotao: {
+                    width: '300px',
+                    height: '300px',
+                    fontSize: '40px',
+                    fontFamily: 'Helvetica',
+                    textAlign: 'center',
+                    background: '#84e',
+                    color: '#fff',
+                    borderRadius: '50%'
+                },
+                infoUser: {
+                    nome: '',
+                    email: '',
+                    telefone: '',
+                    mensagem: '',
+                    resultado: {
+
+                    }
+                }
+              
+             },
+            methods: {            
+                enviaFormulario(){                   
+                    this.infoUser.resultado = {
+                        nome: this.infoUser.nome,
+                        email: this.infoUser.email,
+                        telefone: this.infoUser.telefone,
+                        mensagem: this.infoUser.mensagem
+                    };
+                }
+
+                
+                
+             }
+        })
+    </script> 
+    <style>
+    
+    </style>
+</body>
+</html>

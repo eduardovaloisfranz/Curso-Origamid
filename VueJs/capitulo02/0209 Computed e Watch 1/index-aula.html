@@ -1,0 +1,113 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+      <title>Data - Capitulo02</title>
+  </head>
+  <body>
+      <div id="app">        
+         <h1>{{preco - desconto}}</h1>
+         <p>{{total}}</p>
+         <ul>
+           <li v-for="carro in carros">
+             {{carro.marca}} - {{carro.cor}}
+           </li>           
+         </ul>
+         <br>
+         <ul>
+           <li v-for="carro in carrosAzuis">
+              {{carro.marca}} - {{carro.cor}}
+           </li>
+         </ul>
+         <button @click="remover">Remover carro</button>
+         <p>{{contador}}</p>
+         <button @click="increment">Adicionar</button>
+         <br><br><br><br><br>
+         <label>Digite o CEP</label>
+         <input v-model="endereco.cep" type="text">
+        <div>         
+          <ul>
+            <li v-for="(valor, chave) in endereco">
+              {{chave}} : {{valor}}
+            </li>
+          </ul>
+        </div>
+
+      </div> 
+
+      <script>
+        const app = new Vue({
+          el: '#app',
+          data: {
+            endereco: {
+              cep: 0
+            },
+            preco: 59,
+            desconto: 10,
+            carros: [
+              {
+                marca: 'VW',
+                cor: 'Azul'
+              },
+              {
+                marca: 'Ford',
+                cor: "Preto"
+              },
+              {
+                marca: 'Tesla',
+                cor: 'Azul'
+              }
+            ],
+            contador: 0
+          },
+          methods: {
+            increment(){
+              this.contador+= 5;
+            },
+            remover(){
+              this.carros.pop();
+            },
+            buscaCep(cep){             
+              const URL_TO_FETCH = `http://viacep.com.br/ws/${cep}/json`                            
+              fetch(URL_TO_FETCH)
+                .then(res => res.json()
+                    .then(result => {
+                      this.endereco = result;
+                    })
+                ).catch(res => {
+                  console.log(res)
+                })
+            }
+              
+          },
+          computed: {
+            total() {              
+              return 'R$: ' + (this.preco - this.desconto);
+            },
+            carrosAzuis(){
+              return this.carros.filter((item) => item.cor === 'Azul');
+            }
+          },
+            watch: {
+              contador(valorNovo, valorAntigo){
+                //console.log(this.contador + " Contador foi Modificado?")
+                console.log(valorNovo)
+                console.log(valorAntigo)               
+              },
+              carros(valorNovo, valorAntigo){
+                console.log(valorNovo)
+              },
+              'endereco.cep'(valorNovo){    
+                if(valorNovo.length === 8){
+                  this.buscaCep(valorNovo)                
+                }
+                
+              }
+            }
+        })
+      </script>
+      
+  </body>
+  </html>

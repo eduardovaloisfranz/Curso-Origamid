@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+    <title>Data - Capitulo02</title>
+</head>
+<body>
+    <div id="app">               
+        {{nomeCompleto}}    
+        
+        <button @click="loadPaises">Carregar Paises</button>    
+        <select v-model="selecionado">
+            <option v-for="(pais, index) in paises" :value="index">{{pais.name}}</option>
+        </select> 
+        <p>{{paisSelecionado.capital}}</p>      
+
+        
+
+    </div>        
+    <script>         
+        const vm = new Vue({
+            el:"#app",
+            data: {          
+                nome: 'Eduardo',
+                sobrenome: 'Valois Franz',
+                paises: [],
+                selecionado: '',
+                paisSelecionado: {}
+                
+             },
+            methods: {   
+                loadPaises(){
+                    const URL_TO_FETCH = 'http://restcountries.eu/rest/v2/all'
+                    fetch(URL_TO_FETCH)
+                        .then(res => res.json()
+                                        .then(result => {                                                                                     
+                                            this.paises = result;
+                                        }))
+                }      
+               
+             },
+             computed: {
+                 nomeCompleto(){
+                     return this.nome + ' ' + this.sobrenome
+                 }
+             },
+             watch: {
+                 selecionado(valorNovo){                     
+                     let obj = this.paises[valorNovo];                     
+                     this.paisSelecionado = obj;
+                     
+                 }
+             }
+        })
+    </script> 
+</body>
+</html>
