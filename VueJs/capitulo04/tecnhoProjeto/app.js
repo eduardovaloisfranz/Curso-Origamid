@@ -1,11 +1,13 @@
-const vm = new Vue({
+const app = new Vue({
     el: '#app',
+    vuetify: new Vuetify(),
     data: {
         produtos: [],
         produto: false,
         carrinho: [],
         mensagemAlerta: 'Item Adicionado',
-        alertaAtivo: false
+        alertaAtivo: false,
+        carrinhoAtivo: false
     },
     methods: {
         fetchProdutos() {
@@ -49,8 +51,18 @@ const vm = new Vue({
             this.mensagemAlerta = mensagem;
             this.alertaAtivo = true;
             setTimeout(_ => {
-                this.alerta = false;
+                this.alertaAtivo = false;
             }, 1500)
+        },
+        router() {
+            const hash = document.location.hash;
+            if (hash) {
+                this.fetchProduto(hash.replace("#", ""))
+            }
+        },
+        abrirModalCarrinho() {
+            this.carrinhoAtivo = !this.carrinhoAtivo
+
         }
 
 
@@ -58,6 +70,7 @@ const vm = new Vue({
     created() {
         this.fetchProdutos();
         this.checarLocalStorage()
+        this.router();
     },
     filters: {
         numeroPreco(valor) {
@@ -78,7 +91,11 @@ const vm = new Vue({
     watch: {
         carrinho() {
             window.localStorage.carrinho = JSON.stringify(this.carrinho);
+        },
+        produto() {
+            document.title = this.produto.nome || 'Techno'
+            const hash = this.produto.id || "";
+            history.pushState(null, null, `#${hash}`)
         }
     }
-
 })

@@ -211,7 +211,7 @@ body {
 
 .alerta.ativo {
     display: block;
-    animation: fadeInDown 3s forwards;
+    animation: fadeInDown 1s forwards;
 }
 
 @keyframes fadeInDown{
