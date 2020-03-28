@@ -1,0 +1,86 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>    
+      <title>Data - Capitulo02</title>
+  </head>
+  <body>
+      <div id="app">        
+          {{mensagem}}
+
+          <botao-contador></botao-contador>
+          <botao-contador></botao-contador>
+          <botao-contador></botao-contador>          
+
+
+          <componente-local></componente-local>          
+      </div> 
+
+      <script>
+      Vue.component('BotaoContador', {
+          data(){
+            return {
+              mensagem: 'IssoComponente',
+              total: 0
+            }
+          },
+          template: `<button @click="total++">Contar: {{total}}</button>`,
+          methods: {
+         
+          }
+      })
+
+      Vue.component("ComponenteGlobal", {
+          template: '<p>Global</p>'
+      })
+
+      const componenteLocal = {
+        name: "ComponenteLocal",
+        data(){
+          return {
+            contar: 50,
+          }
+        },
+        template: `
+        <div>
+       <componente-global></componente-global>
+       <componente-local2></componente-local2>          
+        <p>local {{contarDobro}}</p>
+        <p>localdENOVO</p>        
+        </div>
+        `,
+        computed: {
+          contarDobro(){
+             return this.contar * 2;
+          }
+        }
+      }
+
+      
+      const componenteLocal2 ={
+        name:"ComponenteLocal2",
+        template: "<h1>local</h1>"
+      }
+      
+      //Assim pega o componente Local e transforma em um componente GLOBAL!
+      Vue.component("ComponenteLocal2", componenteLocal2)
+      
+      const app = new Vue({
+        el: '#app',
+        data: {
+          mensagem: 'isso'
+        },
+        methods: {
+              
+          },
+          components: {
+              componenteLocal,
+              componenteLocal2
+          }
+        })
+      </script>
+      
+  </body>
+  </html>
