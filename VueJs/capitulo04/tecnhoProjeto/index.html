@@ -52,7 +52,8 @@
                 <ul>
                     <li v-for="avaliacao in produto.avaliacoes" class="avaliacao">
                         <p class="avaliacao_descricao">{{avaliacao.descricao}}</p>
-                        <p class="avaliacao_usuario">{{avaliacao.nome}} | {{avaliacao.estrelas}}</p>                        
+                        <p class="avaliacao_usuario">{{avaliacao.nome}} | {{avaliacao.estrelas}}</p>           
+                        
                     </li>
                 </ul>
 
@@ -64,27 +65,30 @@
 <v-app>
   <template >
   <v-row justify="center" >
-    <v-dialog  v-model="carrinhoAtivo" transition="fab-transition" >      
-      <v-card>
+    <v-dialog  v-model="carrinhoAtivo" transition="fab-transition">      
+      <v-card class="d-flex flex-column">
         <v-card-actions>          
           <v-btn color="green darken-1" text @click="carrinhoAtivo = false">Sair</v-btn>          
         </v-card-actions>
         <v-card-title class="headline">Carrinho de compras</v-card-title>
         <v-spacer></v-spacer>
-        <v-card-text v-for="(item, index) in carrinho">            
-            <div class="d-flex justify-space-between">
+        <v-card-text v-for="(item, index) in carrinho":key="item.id">            
+            <div class="d-flex justify-space-between grey lighten-3">
                 <div>
                     <p class="font-weight-black pa-3">{{item.nome}} </p>
                 </div>
                 <div class="d-flex">
                     <p class="font-weight-black pa-3">{{item.preco | numeroPreco}}</p>
-                    <v-btn color="green darken-1" text @click="removerItem(index)">x</v-btn>     
-                </div>                                            
-            </div>        
-            <div class="flex-column align-end">
-                <p> Valor Total da Compra: {{carrinhoTotal | numeroPreco}}<p>            
-            </div>  
-        </v-card-text>                
+                    <v-btn color="green darken-1" text @click="removerItem(index)">x</v-btn>                      
+                   
+                </div> 
+            </div>    
+            
+        </v-card-text> 
+        <div class="align-end pa-5 d-flex flex-column">
+             <p> Valor Total da Compra: {{carrinhoTotal | numeroPreco}}<p>    
+             <v-btn class="ma-2" outlined color="indigo">Finalizar Compra</v-btn>        
+       </div>                 
         
       </v-card>
     </v-dialog>
