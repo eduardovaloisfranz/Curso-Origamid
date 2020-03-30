@@ -1,0 +1,58 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>  
+      <title>Data - Capitulo02</title>
+  </head>
+  <body>
+      <div id="app">                
+      {{mensagem}}
+      {{totalClientes}}
+      <custom-button @meu-evento="receberEvento"
+                    @origamid="mostrarMensagem"
+      ></custom-button>
+
+      <p>Contador: {{contador}}</p>
+      <meu-botao :contador.sync="contador"      
+      
+     
+      
+      ></meu-botao>
+      </div> 
+
+      <script type="module">  
+     
+      import CustomButton from './components/CustomButton.js'
+      import MeuBotao from './components/MeuBotao.js'
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          mensagem: 'Mensagem Default',
+          totalClientes: 0,
+          contador: 0              
+        },
+        methods: {
+            receberEvento(mensagem){
+              this.mensagem = mensagem;
+            },
+            mostrarMensagem(mensagem){              
+              this.totalClientes = mensagem
+              this.mensagem = 'Origamid Ocorreu'
+            },
+            incrementar(event){
+              this.contador = event
+            }              
+        },
+          components: {
+              CustomButton: CustomButton,
+              MeuBotao: MeuBotao
+          }
+          
+        })
+      </script>
+      
+  </body>
+  </html>
