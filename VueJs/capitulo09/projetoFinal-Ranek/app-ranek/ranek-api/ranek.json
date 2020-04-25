@@ -1,0 +1,52 @@
+{
+  "Usuario": [
+    {
+      "id": "dudufranz13@gmail.com",
+      "nome": "Eduardo valois franz",
+      "senha": 1234,
+      "rua": "Rua desconhecida",
+      "cep": "12312312",
+      "numero": "25",
+      "estado": "SC",
+      "cidade": "Blumenau"
+    }
+  ],
+  "produto": [
+    {
+      "id": "Notebook",
+      "nome": "Notebook",
+      "fk_usuario": "dudufranz13@gmail.com",
+      "preco": "4999",
+      "vendido": "false",
+      "descricao": "Esse é um novo notebook.",
+      "fotos": null
+    },
+    {
+      "id": "Smartphone",
+      "nome": "Smartphone",
+      "fk_usuario": "dudufranz13@gmail.com",
+      "preco": "2999",
+      "vendido": "false",
+      "descricao": "Esse é um novo Smartphone.",
+      "fotos": null
+    },
+    {
+      "id": "Speaker",
+      "nome": "Speaker",
+      "fk_usuario": "dudufranz13@gmail.com",
+      "preco": "897",
+      "vendido": "false",
+      "descricao": "Esse é um novo speaker.",
+      "fotos": null
+    },
+    {
+      "id": "TV",
+      "nome": "Televisao vendida",
+      "fk_usuario": "dudufranz13@gmail.com",
+      "preco": "1299",
+      "vendido": "true",
+      "descricao": "Esse é um nova televisão que foi vendida.",
+      "fotos": null
+    }
+  ]
+}
