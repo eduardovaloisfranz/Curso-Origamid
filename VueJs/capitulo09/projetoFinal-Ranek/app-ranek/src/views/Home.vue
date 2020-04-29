@@ -18,7 +18,7 @@ export default {
   name: "Home",
   components: {
     ProdutoLista,
-    ProdutoBuscar,
-  },
+    ProdutoBuscar
+  }
 };
 </script>

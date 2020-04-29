@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TheHeader />
-    <main>
+    <main id="main">
       <router-view />
     </main>
     <TheFooter />
@@ -15,9 +15,10 @@ export default {
   name: "App",
   components: {
     TheHeader,
-    TheFooter,
-  },
+    TheFooter
+  }
 };
 </script>
 
-<style></style>
+<style scoped>
+</style>

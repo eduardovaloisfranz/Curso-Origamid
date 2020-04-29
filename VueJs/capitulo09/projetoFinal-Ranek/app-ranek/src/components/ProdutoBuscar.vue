@@ -2,9 +2,9 @@
   <b-row>
     <b-col cols="12" sm="12" md="12" lg="12">
       <b-input-group class="mt-3">
-        <b-form-input placeholder="Buscar"></b-form-input>
+        <b-form-input v-model="busca" placeholder="Buscar"></b-form-input>
         <b-input-group-append>
-          <b-button variant="outline-success">
+          <b-button type="submit" variant="outline-success" @click.prevent="buscarProduto">
             <svg
               class="bi bi-search"
               width="1em"
@@ -34,6 +34,16 @@
 <script>
 export default {
   name: "Buscar",
+  data() {
+    return {
+      busca: ""
+    };
+  },
+  methods: {
+    buscarProduto() {
+      this.$router.push({ query: { q: this.busca } });
+    }
+  }
 };
 </script>
 
